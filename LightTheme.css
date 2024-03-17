@@ -1,0 +1,22 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background: Cornsilk;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+canvas {
+    border: 5px solid black;
+}
+
+button{
+	padding: 0; 
+	border: 0; 
+	background: transparent;
+}
+	
+p{
+	color: black;
+}
