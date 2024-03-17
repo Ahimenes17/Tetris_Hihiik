@@ -196,6 +196,12 @@ function showGameOver() {
   context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
 }
 
+const canvasMemory = document.getElementById('memory');
+const canvasNext = document.getElementById('next');
+
+const cMemory = canvasMemory.getContext('2d');
+const cNext = canvasNext.getContext('2d');
+
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 32;
@@ -288,10 +294,24 @@ let accountValues = {
 
 var isPaused = false;
 
+const nextField = [];
+const memoryField = [];
+
+// populate the empty state
+for (let row = 0; row < 3; row++) {
+  nextField[row] = [];
+  memoryField[row] = [];
+  for (let col = 0; col < 3; col++) {
+    nextField[row][col] = 0;
+    memoryField[row][col] = 0
+  }
+}
+
 // game loop
 function loop() {
   rAF = requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
+  cNext.clearRect(0,0,canvasNext.width,canvas.height);
   if (!isPaused) {
     // draw the playfield
     for (let row = 0; row < 20; row++) {
@@ -305,6 +325,24 @@ function loop() {
         }
       }
     }
+
+    // draw the next tetromino
+    if (tetrominoSequence.length === 0) {
+      generateSequence();
+    }
+    nextName = tetrominoSequence[tetrominoSequence.length-1];
+    nextMatrix = tetrominos[nextName];
+    for (let row = 0; row < nextMatrix.length; row++) {
+      for (let col = 0; col < nextMatrix.length; col++) {
+        if (nextMatrix[row][col]) {
+          cNext.fillStyle = colors[nextName];
+
+          // drawing 1 px smaller than the grid creates a grid effect
+          cNext.fillRect(col * grid, row * grid, grid-1, grid-1);
+        }
+      }
+    }
+
     // draw the active tetromino
     if (tetromino) {
       let levelFrameChange = accountValues.level * 7; 
