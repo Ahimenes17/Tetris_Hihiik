@@ -200,7 +200,7 @@ const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 32;
 const tetrominoSequence = [];
-const tetrominoMemory = []
+const tetrominoMemory = [];
 
 // keep track of what is in every cell of the game using a 2d array
 // tetris playfield is 10x20, with a few rows offscreen
@@ -289,98 +289,108 @@ let accountValues = {
 var isPaused = false;
 
 // game loop
-function loop() { if (!isPaused) {
+function loop() {
   rAF = requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
-
-  // draw the playfield
-  for (let row = 0; row < 20; row++) {
-    for (let col = 0; col < 10; col++) {
-      if (playfield[row][col]) {
-        const name = playfield[row][col];
-        context.fillStyle = colors[name];
-
-        // drawing 1 px smaller than the grid creates a grid effect
-        context.fillRect(col * grid, row * grid, grid-1, grid-1);
-      }
-    }
-  }
-
-  // draw the active tetromino
-  if (tetromino) {
-    let levelFrameChange = accountValues.level * 7; 
-    if (++count > (40 - Math.min(levelFrameChange, 37))) {
-      tetromino.row++;
-      count = 0;
-
-      // place piece if it runs into anything
-      if (!isValidMove(tetromino.matrix, tetromino.row, tetromino.col)) {
-        tetromino.row--;
-        placeTetromino();
-      }
-    }
-    
-    context.fillStyle = colors[tetromino.name];
-
-    for (let row = 0; row < tetromino.matrix.length; row++) {
-      for (let col = 0; col < tetromino.matrix[row].length; col++) {
-        if (tetromino.matrix[row][col]) {
+  if (!isPaused) {
+    // draw the playfield
+    for (let row = 0; row < 20; row++) {
+      for (let col = 0; col < 10; col++) {
+        if (playfield[row][col]) {
+          const name = playfield[row][col];
+          context.fillStyle = colors[name];
 
           // drawing 1 px smaller than the grid creates a grid effect
-          context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid-1, grid-1);
+          context.fillRect(col * grid, row * grid, grid-1, grid-1);
         }
       }
     }
+    // draw the active tetromino
+    if (tetromino) {
+      let levelFrameChange = accountValues.level * 7; 
+      if (++count > (40 - Math.min(levelFrameChange, 37))) {
+        tetromino.row++;
+        count = 0;
+
+        // place piece if it runs into anything
+        if (!isValidMove(tetromino.matrix, tetromino.row, tetromino.col)) {
+          tetromino.row--;
+          placeTetromino();
+        }
+      }
+      
+      context.fillStyle = colors[tetromino.name];
+
+      for (let row = 0; row < tetromino.matrix.length; row++) {
+        for (let col = 0; col < tetromino.matrix[row].length; col++) {
+          if (tetromino.matrix[row][col]) {
+
+            // drawing 1 px smaller than the grid creates a grid effect
+            context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid-1, grid-1);
+          }
+        }
+      }
+    }
+  } else {
+    context.fillStyle = 'red';
+    context.font = '36px monospace';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('PAUSED', canvas.width / 2, canvas.height / 2);
   }
 }
-}
+
 // listen to keyboard events to move the active tetromino
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
 
-  // left and right arrow keys (move)
-  if (e.code == 'ArrowLeft' || e.code == 'ArrowRight') {
-    const col = e.code == 'ArrowLeft'
-      ? tetromino.col - 1
-      : tetromino.col + 1;
+  if (e.code == 'Escape') isPaused = !isPaused;
 
-    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
-      tetromino.col = col;
+  if (!isPaused) {
+    // left and right arrow keys (move)
+    if (e.code == 'ArrowLeft' || e.code == 'ArrowRight') {
+      const col = e.code == 'ArrowLeft'
+        ? tetromino.col - 1
+        : tetromino.col + 1;
+
+      if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+        tetromino.col = col;
+      }
     }
-  }
 
-  // up arrow key (rotate)
-  if (e.code == 'ArrowUp') {
-    const matrix = rotate(tetromino.matrix);
-    if (isValidMove(matrix, tetromino.row, tetromino.col)) {
-      tetromino.matrix = matrix;
+    // up arrow key (rotate)
+    if (e.code == 'ArrowUp') {
+      const matrix = rotate(tetromino.matrix);
+      if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+        tetromino.matrix = matrix;
+      }
     }
-  }
 
-  // down arrow key (drop)
-  if (e.code == 'ArrowDown') {
-    const row = tetromino.row + 1;
-    if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
-      tetromino.row = row - 1;
+    // down arrow key (drop)
+    if (e.code == 'ArrowDown') {
+      const row = tetromino.row + 1;
+      if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+        tetromino.row = row - 1;
 
+        placeTetromino();
+        return;
+      }
+
+      tetromino.row = row;
+      updateScore(POINTS.SOFT_DROP);
+    }
+
+    if (e.code == 'Space') {
+      const row = tetromino.row;
+      dropCount = 0;
+      while (isValidMove(tetromino.matrix, row + dropCount + 1, tetromino.col)) {
+        dropCount += 1;
+      }
+
+      updateScore(dropCount * POINTS.HARD_DROP);
+      tetromino.row = row + dropCount;
       placeTetromino();
-      return;
     }
-
-    tetromino.row = row;
-    updateScore(POINTS.SOFT_DROP);
-  }
-
-  if (e.code == 'Space') {
-    const row = tetromino.row;
-    dropCount = 0;
-    while (isValidMove(tetromino.matrix, row + dropCount + 1, tetromino.col)) {
-      dropCount += 1;
-    }
-
-    updateScore(dropCount * POINTS.HARD_DROP);
-    tetromino.row = row + dropCount;
-    placeTetromino();
   }
 });
 
