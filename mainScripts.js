@@ -62,6 +62,12 @@ function getNextTetromino() {
   }
 
   const name = tetrominoSequence.pop();
+
+  return getTetromino(name);
+}
+
+function getTetromino(name) {
+
   const matrix = tetrominos[name];
 
   // I and O start centered, all others start in left-middle
@@ -77,7 +83,6 @@ function getNextTetromino() {
     col: col         // current col
   };
 }
-
 // rotate an NxN matrix 90deg
 
 function rotate(matrix) {
@@ -172,6 +177,8 @@ function placeTetromino() {
   clearLines();
 
   tetromino = getNextTetromino();
+
+  memoryCooldown = false;
 }
 
 function updateScore(points) {
@@ -215,7 +222,6 @@ const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 32;
 const tetrominoSequence = [];
-const tetrominoMemory = [];
 
 // keep track of what is in every cell of the game using a 2d array
 // tetris playfield is 10x20, with a few rows offscreen
@@ -295,6 +301,7 @@ let tetromino = getNextTetromino();
 let rAF = null;  // keep track of the animation frame so we can cancel it
 let gameOver = false;
 
+
 let accountValues = {
   score: 0,
   linesCleared: 0,
@@ -316,11 +323,31 @@ for (let row = 0; row < 3; row++) {
   }
 }
 
+let memory = ''; 
+let memoryCooldown = false;
+
+function setMemory() {
+  if (memoryCooldown == false) {
+    let memoryTemp = tetromino.name;
+    if (memory == '') {
+      memory = memoryTemp;
+      tetromino = getNextTetromino();
+    }
+    else {
+      tetromino = getTetromino(memory);
+      memory = memoryTemp;
+    }
+    delete memoryTemp;
+    memoryCooldown = true;
+  }
+}
+
 // game loop
 function loop() {
   rAF = requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
-  cNext.clearRect(0,0,canvasNext.width,canvas.height);
+  cNext.clearRect(0,0,canvasNext.width,canvasNext.height);
+  cMemory.clearRect(0,0,canvasMemory.width,canvasMemory.height)
   if (!isPaused) {
     // draw the playfield
     for (let row = 0; row < 20; row++) {
@@ -352,6 +379,20 @@ function loop() {
       }
     }
 
+    // draw the memory tetromino
+    if (memory != '') {
+      memoryMatrix = tetrominos[memory];
+      for (let row = 0; row < memoryMatrix.length; row++) {
+        for (let col = 0; col < memoryMatrix.length; col++) {
+          if (memoryMatrix[row][col]) {
+            cMemory.fillStyle = colors[memory];
+
+            // drawing 1 px smaller than the grid creates a grid effect
+            cMemory.fillRect(col * grid, row * grid, grid-1, grid-1);
+          }
+        }
+      }
+    }
     // draw the active tetromino
     if (tetromino) {
       let levelFrameChange = accountValues.level * 7; 
@@ -392,6 +433,10 @@ document.addEventListener('keydown', function(e) {
   if (gameOver) return;
 
   if (e.code == 'Escape') isPaused = !isPaused;
+
+  if (e.code == 'ShiftLeft' || e.code == 'ShiftRight') { 
+    setMemory();
+  }
 
   if (!isPaused) {
     // left and right arrow keys (move)
