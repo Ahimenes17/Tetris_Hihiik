@@ -1,8 +1,6 @@
 var btn1 = document.getElementById("theme-button");
 var link = document.getElementById("theme-link");
-
 var btn2 = document.getElementById("restart-button");
-
 
 btn1.addEventListener("click", function () { ChangeTheme(); });
 
