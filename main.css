@@ -1,1 +1,20 @@
-йцукаепнргошлд
+@font-face{
+	font-family: 'ComicoroRU'; 
+	src: local('Comicoro'),
+		 url(ComicoroRu_0.ttf) format(ttf);
+	font-size: 30px;
+}
+
+html, body{
+	font-family: ComicoroRU;
+	align-items: center;
+    justify-content: center;
+	height: 100%;
+    margin: 0;
+}
+	
+button{
+	padding: 0; 
+	border: 0; 
+	background: transparent;
+}	
