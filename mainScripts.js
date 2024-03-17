@@ -1,7 +1,16 @@
-var btn = document.getElementById("theme-button");
+var btn1 = document.getElementById("theme-button");
 var link = document.getElementById("theme-link");
 
-btn.addEventListener("click", function () { ChangeTheme(); });
+var btn2 = document.getElementById("restart-button");
+
+
+btn1.addEventListener("click", function () { ChangeTheme(); });
+
+btn2.addEventListener("click", function () { Restart();});
+
+function Restart(){
+	location.reload();
+}
 
 function ChangeTheme()
 {
