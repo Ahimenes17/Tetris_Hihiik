@@ -5,19 +5,18 @@
 
 html, body{
     font-family: "Comicoro";
-    height: 100%;
-    margin: 0;
-    background: #e2effb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	font-size: 40px;
+    background: #e2effb; 
+    font-size: 60px;
 }
 
 button{
     font-family: "Comicoro";
-    background: #578ec9;
-    color: burlywood;
-    font-size: large;
-    
+    background: rgba(87, 142, 201, 0.5);;
+    color: darkblue;
+    font-size: 80px;
+    float: right;
+}
+
+div{
+    float: right;
 }
