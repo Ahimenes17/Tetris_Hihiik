@@ -20,12 +20,14 @@ canvas {
 }
 
 button{
+	font-family: "Comicoro";
 	padding: 0; 
 	border: 0; 
 	background: transparent;
 }
 	
 p{
+	font-family: "Comicoro";
 	font-size: 40px;
 	color: black;
 }

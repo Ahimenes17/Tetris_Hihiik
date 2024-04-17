@@ -1,0 +1,23 @@
+@font-face{
+	font-family: "Comicoro"; 
+	src: local('Comicoro'),
+		 url(Comicoro.ttf);}
+
+html, body{
+    font-family: "Comicoro";
+    height: 100%;
+    margin: 0;
+    background: #e2effb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	font-size: 40px;
+}
+
+button{
+    font-family: "Comicoro";
+    background: #578ec9;
+    color: burlywood;
+    font-size: large;
+    
+}
