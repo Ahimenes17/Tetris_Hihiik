@@ -1,4 +1,3 @@
-var btn3 = document.getElementById("scorebtn");
 var btn1 = document.getElementById("theme-button");
 var link = document.getElementById("theme-link");
 var btn2 = document.getElementById("restart-button");
@@ -7,11 +6,6 @@ btn1.addEventListener("click", function () { ChangeTheme(); });
 
 btn2.addEventListener("click", function () { Restart();});
 
-btn3.addEventListener("click", function () { ShowForm();})
-
-function ShowForm(){
-  document.getElementById("form1").style.visibility = 'visible'
-}
 
 function Restart(){
 	location.reload();
@@ -215,7 +209,7 @@ function showGameOver() {
   context.textAlign = 'center';
   context.textBaseline = 'middle';
   context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
-	sendScores();
+  document.getElementById('form1').style.visibility = 'visible'
 }
 
 const canvasMemory = document.getElementById('memory');
