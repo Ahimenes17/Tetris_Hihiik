@@ -1,11 +1,17 @@
 var btn1 = document.getElementById("theme-button");
 var link = document.getElementById("theme-link");
 var btn2 = document.getElementById("restart-button");
+var btn3 = document.getElementById("btn2Back")
 document.getElementById("form1").style.visibility = 'hidden'
 btn1.addEventListener("click", function () { ChangeTheme(); });
 
 btn2.addEventListener("click", function () { Restart();});
 
+btn3.addEventListener("click", function () {BackMenu ()})
+
+function BackMenu(){
+    window.location.href = "file:///home/ahimenes17/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/GitHub/Tetris_Hihiik/menu/menu.html"; 
+}
 
 function Restart(){
 	location.reload();

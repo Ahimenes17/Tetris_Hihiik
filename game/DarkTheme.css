@@ -9,9 +9,27 @@ html, body {
 	font-family: "Comicoro";
     height: 100%;
     margin: 0;
-    background: #e2effb;
+    background: #1D1E33;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+canvas {
+    border: 5px solid #FAEEDD;
+}
+	
+button{
+	font-family: "Comicoro";
+	padding: 0; 
+	border: 0; 
+	background: transparent;
 	font-size: 40px;
+	color: white;
+}	
+
+p{
+	font-family: "Comicoro";
+	font-size: 40px;
+	color: white;
 }
