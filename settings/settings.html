@@ -15,8 +15,6 @@
             }
             button{
                 font-family: "Comicoro";
-                float: right;
-                float: inline-end;
                 font-size: 70px;
                 background: rgba(87, 142, 201, 0.5);;
                 color: darkblue;
@@ -24,7 +22,12 @@
         </style>
     </head>
     <body>
-        <button class="btn3Back" id="btn3Back">Back</button>
-    <script type="text/javascript" src="settings.js"></script>
+        <button class="btn3Back" id="btn3Back" style="float: right; float: inline-end;">Back</button>
+        <button class="btn-sound" id="btn-sound"><img src="./soundOn.svg" id="sound-b"></button>
+        <input type="range" min="1" max="100" id="sound" step="1" value="45">
+        <br>
+        <button class="btn-music" id="btn-music"><img src="./musicOn.svg" id="music-b"></button>
+        <input type="range" min="1" max="100" id="music" step="1" value="45">
+        <script type="text/javascript" src="settings.js"></script>
     </body>
 </html>
