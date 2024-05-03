@@ -495,4 +495,4 @@ document.addEventListener('keydown', function(e) {
 // start the game
 rAF = requestAnimationFrame(loop);
 
-
+var bg = new playSound("bg.mp3", true, 0.1);

@@ -6,7 +6,7 @@
         <style>
             @font-face{
 	            font-family: "Comicoro"; 
-        	    src: local('Comicoro'),
+        	    src: local('./Comicoro'),
 		        url(Comicoro.ttf);}
             html, body{
                 font-family: "Comicoro";
@@ -23,11 +23,12 @@
     </head>
     <body>
         <button class="btn3Back" id="btn3Back" style="float: right; float: inline-end;">Back</button>
-        <button class="btn-sound" id="btn-sound"><img src="./soundOn.svg" id="sound-b"></button>
+        <button class="btn-sound" id="btn-sound" width="30px" height="30px"><img src="./soundOn.svg" id="soundon-b" width="30px" height="30px"><img src="./soundOff.svg" id="soundoff-b" width="30px" height="30px"></button>
         <input type="range" min="1" max="100" id="sound" step="1" value="45">
         <br>
-        <button class="btn-music" id="btn-music"><img src="./musicOn.svg" id="music-b"></button>
+        <button class="btn-music" id="btn-music" width="30px" height="30px"><img src="./musicOn.svg" id="musicon-b" width="30px" height="30px"><img src="./musicOff.svg" id="musicoff-b" width="30px" height="30px"></button>
         <input type="range" min="1" max="100" id="music" step="1" value="45">
         <script type="text/javascript" src="settings.js"></script>
+        
     </body>
 </html>
