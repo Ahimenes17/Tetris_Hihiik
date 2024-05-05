@@ -1,6 +1,6 @@
 @font-face{
 	font-family: "Comicoro"; 
-	src: local('./Comicoro'),
+	src: local('Comicoro'),
 		 url(Comicoro.ttf);}
 
 html, body{
