@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ScoreBoard</title>
+        <meta charset="UTF-8">
+        <style>
+            @font-face{
+	            font-family: "Comicoro"; 
+        	    src: local('Comicoro'),
+		        url(../../Comicoro.ttf);}
+
+            html, body{
+                font-family: "Comicoro";
+                background: Cornsilk; 
+                font-size: 60px;
+            }
+            table {
+                border-collapse: collapse;
+            }
+            table, th, tr{
+                align-items: center;
+                margin: 0 auto; 
+                border: 4px solid black;
+            }
+            button{
+                font-family: "Comicoro";
+                float: right;
+                float: inline-end;
+                font-size: 70px;
+                background: rgba(87, 142, 201, 0.5);;
+                color: darkblue;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table class="ScoresBoard" id="ScoresBoard">
+                <caption>The Great Scores of HiHIIK Tetris</caption>
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn1Back" id="btn1Back">Back</button>
+        </div>
+        <script type="text/javascript" src="scoreTable.js"></script>
+    </body>
+</html>
