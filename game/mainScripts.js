@@ -2,7 +2,7 @@ var btn1 = document.getElementById("theme-button");
 var link = document.getElementById("theme-link");
 var btn2 = document.getElementById("restart-button");
 var btn3 = document.getElementById("btn2Back")
-document.getElementById("form1").style.visibility = 'hidden'
+
 btn1.addEventListener("click", function () { ChangeTheme(); });
 
 btn2.addEventListener("click", function () { Restart();});
@@ -215,7 +215,6 @@ function showGameOver() {
   context.textAlign = 'center';
   context.textBaseline = 'middle';
   context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
-  document.getElementById('form1').style.visibility = 'visible'
 }
 
 const canvasMemory = document.getElementById('memory');
@@ -495,4 +494,3 @@ document.addEventListener('keydown', function(e) {
 // start the game
 rAF = requestAnimationFrame(loop);
 
-var bg = new playSound("bg.mp3", true, 0.1);
