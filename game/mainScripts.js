@@ -215,6 +215,34 @@ function showGameOver() {
   context.textAlign = 'center';
   context.textBaseline = 'middle';
   context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+  var formContainer = document.getElementById('formContainer');
+    
+    var form = document.createElement('form');
+    
+    var gameOverLable1 = document.createElement('lable');
+    gameOverLable1.textContent = 'Game Over!';
+    form.appendChild(gameOverLable1);
+    
+    var result = document.createElement('lable');
+    result.textContent = 'Your Result:';
+    form.appendChild(result);
+
+    var scoreLabel = document.createElement('label');
+    scoreLabel.textContent = 'Score:';
+    form.appendChild(scoreLabel);
+        
+    var levelLabel = document.createElement('label');
+    levelLabel.textContent = 'Level:';
+    form.appendChild(levelLabel);
+    
+    var nameInput = document.createElement('input');
+    nameInput.setAttribute('type', 'name');
+    form.appendChild(emailInput);
+    
+    var submitButton = document.createElement('input');
+    submitButton.setAttribute('type', 'submit');
+    submitButton.setAttribute('value', 'Отправить');
+    form.appendChild(submitButton);
 }
 
 const canvasMemory = document.getElementById('memory');
