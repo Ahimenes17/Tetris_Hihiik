@@ -7,13 +7,13 @@ btn_scores.addEventListener("click", function () {ShowScores ()})
 btn_settings.addEventListener("click", function () {ShowSettings ()})
 
 function StartGame(){
-    window.location.href = "file:///home/ahimenes17/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/GitHub/Tetris_Hihiik/game/tetris1.html";
+    window.location.href = "../game/tetris1.html";
 }
 
 function ShowScores(){
-    window.location.href = "file:///home/ahimenes17/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/GitHub/Tetris_Hihiik/scoreBoard/scoresTable.html"
+    window.location.href = "../scoreBoard/scoresTable.html"
 }
 
 function ShowSettings(){
-    window.location.href = "file:///home/ahimenes17/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/GitHub/Tetris_Hihiik/settings/settings.html"
+    window.location.href = "../settings/settings.html"
 }
